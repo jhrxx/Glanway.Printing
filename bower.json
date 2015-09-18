@@ -1,0 +1,9 @@
+{
+  "name": "printing",
+  "private": true,
+  "dependencies": {
+    "bourbon": "~4.2.4",
+    "jquery": "~2.1.1",
+    "jquery-minicolors": "~2.1.12"
+  }
+}

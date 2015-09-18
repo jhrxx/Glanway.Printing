@@ -1,0 +1,247 @@
+$light:     #fff;
+$stable:    #f8f8f8;
+$positive:  #4a87ee !default;
+$royal:     #8a6de9;
+$dark:      #444 !default;
+
+$calm:      rgb(66, 184, 221);
+$balanced:  rgb(90, 182, 94) !default;
+$energized: rgb(246, 124, 0) !default;
+$assertive: rgb(223, 80, 72) !default;
+$warning:   rgb(250, 210, 50);
+
+
+$white: #fff;
+$black: #000;
+$purple: #4a425a;
+$gray: #8a8a8a !default;
+$blue: #1fbdff;
+$green: #0f5 !default;
+$red: #f00;
+
+$emerald: #45aece;
+$zaffer: #1e3d84;
+$blueness: #009ad6;
+
+
+$base-gray: #1f1f1f !default;
+$gray-lighten-5: lighten( $base-gray, 5% ); //#262626;
+$gray-lighten-20: lighten( $base-gray, 20% ); //#505050;
+$gray-lighten-30: lighten( $base-gray, 32% ); //#707070;
+$gray-lighten-60: lighten( $base-gray, 58% ); //#b1b1b1;
+$gray-lighten-80: lighten( $base-gray, 78% ); //#e4e4e4;
+
+$default-border: $gray-lighten-20 !default;
+
+$dark-gray: $gray-lighten-30;
+$input-bg: #d7e6ff !default;
+$line: #ddd;
+
+$month-line: #ff9c2a;
+$week-line: #0d86ff;
+
+
+$toast-error-border: #ba1717;
+$toast-error-bg: rgba(#960000, .8);
+
+$toast-success-border: #007a29;
+$toast-success-bg: rgba(#144d27, .8);
+
+
+@mixin clearfix {
+  display: inline-block;
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+  * html & { height: 1px }
+}
+
+@mixin box-shadow ($shadows...) {
+  -moz-box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@mixin gradient($from, $to) {
+  /* fallback/image non-cover color */
+  background-color: $from;
+
+  /* For IE 10 */
+  background-image: linear-gradient($from, $to);
+
+  /* Firefox 3.6+ */
+  background-image: -moz-linear-gradient($from, $to);
+
+  /* Safari 4+, Chrome 1+ */
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
+
+  /* Safari 5.1+, Chrome 10+ */
+  background-image: -webkit-linear-gradient($from, $to);
+
+  /* Opera 11.10+ */
+  background-image: -o-linear-gradient($from, $to);
+}
+
+@mixin force-wrap {
+  white-space: pre;
+  // CSS 2.0
+  white-space: pre-wrap;
+  // CSS 2.1
+  white-space: pre-line;
+  // CSS 3.0
+  white-space: -pre-wrap;
+  // Opera 4-6
+  white-space: -o-pre-wrap;
+  // Opera 7
+  white-space: -moz-pre-wrap;
+  // Mozilla
+  white-space: -hp-pre-wrap;
+  // HP Printers
+  word-wrap: break-word;
+}
+
+@mixin none-select {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
+@mixin ellipsis ($no-wrap: nowrap) {
+  white-space: $no-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin float ($side: left) {
+  display: inline;
+  float: unquote($side);
+}
+
+@mixin float-left {
+  @include float(left);
+}
+
+@mixin float-right {
+  @include float(right);
+}
+
+@mixin align ($side: center) {
+  text-align: unquote($side);
+}
+
+@mixin align-left {
+  @include align(left);
+}
+
+@mixin align-right {
+  @include align(right);
+}
+
+@mixin border-radius ($value: 3px) {
+  -webkit-border-radius: $value;
+  -moz-border-radius: $value;
+  border-radius: $value;
+
+  // keeps background from busting out of border
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+
+@mixin opacity ($value: 0.5) {
+  opacity: $value;
+  zoom: 1;
+}
+
+@mixin rotate($degrees) {
+  -webkit-transform: rotate($degrees);
+  -moz-transform: rotate($degrees);
+  transform: rotate($degrees);
+}
+
+// https://dvcs.w3.org/hg/FXTF/raw-file/tip/filters/index.html
+//
+// grayscale      ex: filter: grayscale(100%);
+// sepia          ex: filter: sepia(100%);
+// saturate       ex: filter: saturate(0%);
+// hue-rotate     ex: filter: hue-rotate(45deg);
+// invert         ex: filter: invert(100%);
+// brightness     ex: filter: brightness(15%);
+// contrast       ex: filter: contrast(200%);
+// blur           ex: filter: blur(2px);
+@mixin filter($filter-type,$filter-amount) {
+  //-webkit-filter: $filter-type+unquote('(#{$filter-amount})');
+  //-moz-filter: $filter-type+unquote('(#{$filter-amount})');
+  //-ms-filter: $filter-type+unquote('(#{$filter-amount})');
+  //-o-filter: $filter-type+unquote('(#{$filter-amount})');
+  //filter: $filter-type+unquote('(#{$filter-amount})');
+}
+
+@mixin shake {
+  -webkit-transform-origin:center center 0 50%;
+  -moz-transform-origin:center center 0 50%;
+  transform-origin:center center 0 50%;
+  -webkit-animation-name:shake;
+  -moz-animation-name:shake;
+  animation-name:shake;
+  -webkit-animation-duration:.1s;
+  -moz-animation-duration:.1s;
+  animation-duration:.1s;
+  -webkit-animation-iteration-count:infinite;
+  -moz-animation-iteration-count:infinite;
+  animation-iteration-count:infinite;
+  -webkit-animation-timing-function:ease-in-out;
+  -moz-animation-timing-function:ease-in-out;
+  animation-timing-function:ease-in-out;
+  -webkit-animation-delay:0s;
+  -moz-animation-delay:0s;
+  animation-delay:0s;
+}
+
+@mixin thin-border($border-width, $url) {
+  border-style: solid;
+  border-width: $border-width;
+  -webkit-border-image: $url 2 repeat;
+  -moz-border-image: $url 2 repeat;
+  -o-border-image: $url 2 repeat;
+  border-image: $url 2 repeat;
+}
+
+
+@mixin arrow($size:5px, $direction:left, $color: #fff) {
+  border-width: $size;
+  border-color: transparent;
+  border-style: solid;
+  display: inline-block;
+  height: 0px;
+  width: 0px;
+
+  @if $direction == "right" {
+   border-left-color: $color;
+   border-right-width: 0px;
+ } @else if $direction == "left" {
+   border-right-color: $color;
+   border-left-width: 0px;
+ } @else if $direction == "up" {
+   border-bottom-color: $color;
+   border-top-width: 0px;
+ } @else if $direction == "down" {
+   border-top-color: $color;
+   border-bottom-width: 0px;
+ }
+}
+
+
+@mixin button-active-style($active-bg-color, $active-border-color) {
+  &:active {
+    border-color: $active-border-color;
+    background-color: $active-bg-color;
+    box-shadow: inset 0px 1px 3px rgba(0,0,0,0.15);
+  }
+}

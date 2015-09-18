@@ -1,0 +1,158 @@
+@charset "UTF-8";
+@import "mixin";
+// bower:scss
+@import "bower_components/bourbon/app/assets/stylesheets/_bourbon.scss";
+// endbower
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}:after,:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+/**
+ * YUI 3.5.0 - reset.css (http://developer.yahoo.com/yui/3/cssreset/)
+ * http://cssreset.com
+ * Copyright 2012 Yahoo! Inc. All rights reserved.
+ * http://yuilibrary.com/license/
+ */
+html{
+  color:#000;
+  background:#FFF;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p{
+  margin:0;
+  padding:0;
+}
+fieldset,
+img {
+  border:0;
+}
+
+ol,
+ul {
+  list-style:none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size:100%;
+  font-weight:normal;
+}
+input,
+textarea,
+select {
+  font-family:inherit;
+  font-size:inherit;
+  font-weight:inherit;
+}
+/*to enable resizing for IE*/
+input,
+textarea,
+select {
+  *font-size:100%;
+}
+
+input {
+  padding: 2px 3px;
+  font-size: 14px;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #333;
+  width: 50px;
+  margin: 0 5px;
+  &:focus {
+    outline: 0;
+  }
+}
+.minicolors-theme-default { 
+  .minicolors-input {
+    padding-left: 5px;
+    padding-right: 20px;
+  }
+  .minicolors-swatch {
+    right: 6px;
+    left: auto;
+    top: 1px;
+  }
+}
+
+$header-height: 85px;
+
+body {
+  background: #fafafa;
+  font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft Yahei","WenQuanYi Micro Hei",sans-serif;
+  color: #333;
+  // background: #f1f1f1;
+  & > header {
+    background: #fff;
+    height: $header-height;
+    @include position(absolute, 0 0 null 0);
+  } 
+  & > article {
+    height: 100vh;
+    @include align-items(stretch);
+    @include display(flex);
+    @include flex-direction(row);
+    @include justify-content(flex-start);
+    & > * {
+      margin-top: $header-height;
+      padding: 10px; 
+    }
+  }
+}
+
+#logo {
+  height: $header-height;
+  width: 350px;
+  display: inline-block;
+  background: url(../images/logo.png) no-repeat center;
+}
+#control {
+  color:#fff;
+  background: #00b6f7;
+  width: 240px;
+}
+
+.hero-unit {
+  margin: 50px auto 0 auto;
+  width: 300px;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 30px;
+  background-color: #eee;
+  border-radius: 6px;
+  padding: 60px;
+  h1 {
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+}
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}

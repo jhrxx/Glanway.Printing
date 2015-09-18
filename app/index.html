@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>紫丹印务</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/jquery-minicolors/jquery.minicolors.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <header>
+      <a href="/" id="logo"></a>
+    </header>
+    <article>
+      <aside id="control">
+        <div class="group">
+          <label for="font_size">字号大小</label>
+          <select name="font_size" id="font_size"></select>
+        </div>
+        <div class="group">
+          <label for="text_color">字体颜色</label>
+          <input type="text" id="text_color" class="color-picker-field" value="#70c24a">
+        </div>
+        <div class="group">
+          <label for="text_border_color">边线颜色</label>
+          <input type="text" id="text_border_color" class="color-picker-field" value="#70c24a">
+        </div>
+      </aside>
+      <section>
+        箱体参数
+        长:<input type="text" id="length" value="250" />mm
+        宽:<input type="text" id="width" value="200" />mm
+        高:<input type="text" id="height" value="150" />mm
+        <div id="canvas"></div>
+      </section>
+    </article>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/jquery-minicolors/jquery.minicolors.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+</body>
+</html>
