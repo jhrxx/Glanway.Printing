@@ -14,7 +14,10 @@
     <!-- endbuild -->
 
     <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/main.css">
+    
+    <!-- <link href="styles/index.css" rel="stylesheet" /> -->
     <!-- endbuild -->
 
   </head>
@@ -22,37 +25,216 @@
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <!--  -->
     <header>
       <a href="/" id="logo"></a>
+      <div class="right">
+          <a href="#" id="save" class="btn btn-success">保存</a>
+      </div>
     </header>
-    <article>
-      <aside id="control">
-        <div class="group">
-          <label for="font_size">字号大小</label>
-          <select name="font_size" id="font_size"></select>
-        </div>
-        <div class="group">
-          <label for="text_color">字体颜色</label>
-          <input type="text" id="text_color" class="color-picker-field" value="#70c24a">
-        </div>
-        <div class="group">
-          <label for="text_border_color">边线颜色</label>
-          <input type="text" id="text_border_color" class="color-picker-field" value="#70c24a">
-        </div>
-      </aside>
+    <div id="preview" class="hide"></div>
+    <article id="main_content">
+        <aside id="controls">
+            <div class="container">
+                <div class="group">
+                    <div class="title">文字</div>
+                     <input type="text" id="text" value="">
+                    <input type="button" value="添加" id="add_text_btn"/><br />
+                    <label for="text_size">字体</label>
+                    <input class="input-sm" type="text" id="text_size" value="14">px
+                    <!-- 
+SimSun   宋体
+SimHei   黑体
+FangSong_GB2312  仿宋_GB2312
+KaiTi_GB2312     楷体_GB2312
+YouYuan  幼圆
+STSong   华文宋体
+STZhongsong  华文中宋
+STKaiti  华文楷体
+STFangsong   华文仿宋
+STXihei  华文细黑
+STLiti   华文隶书
+STXingkai    华文行楷
+STXinwei     华文新魏
+STHupo   华文琥珀
+STCaiyun     华文彩云
+FZYaoTi  方正姚体简体
+FZShuTi  方正舒体简体
+LiSu      隶书 -->
+                    <select class="hide" name="" id="">
+                        <option value="SimSun">宋体</option>
+                        <option value="SimHei">黑体</option>
+                        <option value="">微软雅黑</option>
+                        <option value="">Arial</option>
+                        <option value="">Calibri</option>
+                    </select>
+                    <br>
+                    <label for="text_color">字体颜色</label>
+                    <input type="text" id="text_color" class="color-picker-text" value="#333333">
+
+                    <!-- <label for="font_family">字体样式</label>
+                    <select name="font_family" id="font_family">
+                        <option>微软雅黑</option>
+                        <option>黑体</option>
+                    </select><br />
+ -->
+                </div>
+                <div class="group">
+                    <div class="title">图片</div>
+                    <div id="img_upload">
+                        <input id="upload_img" type="file" class="hide" />
+                        <a href="#" class="btn btn-xsmall" id="upload_img_btn">上传图片</a>
+                    </div>
+                </div>
+                <div class="group hide">
+                    <div class="title">图层处理</div>
+                    <div id="ico_box">
+                        <a href="#"><img src="images/z_index.png" alt="" /></a>
+                        <a href="#"><img src="images/center_align.png" alt="" /></a>
+                        <a href="#"><img src="images/copy.png" alt="" /></a>
+                        <a href="#"><img src="images/h_reverse.png" alt="" /></a>
+                        <a href="#"><img src="images/v_reverse.png" alt="" /></a>
+                    </div>
+                </div>
+                <div class="group hide" id="editPosition">
+                    <div class="title">编辑区位置</div>
+                    坐标1(左上): X
+                    <input type="text" value="123" />
+                    Y
+                    <input type="text" value="123" /><br />
+                    坐标1(右下): Y
+                    <input type="text" value="123" />
+                    Y
+                    <input type="text" value="123" />
+                </div>
+                <div class="group">
+                    <div class="title">常用图例</div>
+                    <input type="text" id="text_color" class="color-picker-svg" value="#333333">
+                    <ul class="list">
+                    
+                        <li><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     viewBox="0 0 14.625 22.027" style="enable-background:new 0 0 14.625 22.027;" xml:space="preserve">
+<path style="fill-rule:evenodd;clip-rule:evenodd;" d="M14.312,5.971c-0.557-2.152-1.465-4.387-2.828-5.946L3.161,0
+    c-1.375,1.56-2.29,3.807-2.849,5.971c-1.15,4.444,0.882,7.628,6.049,7.969v7.092H3.808v0.995h7.068v-0.995H8.312v-7.095
+    C13.443,13.579,15.46,10.41,14.312,5.971z"/>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</li>
+                        <li><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     viewBox="0 0 14.796 24" style="enable-background:new 0 0 14.796 24;" xml:space="preserve">
+<g>
+    <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M0.142,8.5c0.5,3.991,3.557,4.488,3.775,7.385V22c0,0,0,0.476-0.411,0.654
+        c-0.411,0.178-2.824,0.371-2.824,0.861S2.723,24,4.632,24c1.909,0,3.95,0.005,3.95-0.485s-2.413-0.683-2.824-0.861
+        C5.348,22.476,5.348,22,5.348,22l0.024-6c0.145-3,3.276-3.457,3.782-7.5C9.661,4.457,8.648,2,8.648,2h-8
+        C0.648,2-0.365,4.457,0.142,8.5z"/>
+    <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M14.654,6.5C15.161,2.457,14.148,0,14.148,0h-8c0,0-0.218,0.529-0.401,1.5
+        h3.328c0,0,1.121,2.72,0.56,7.196c-0.161,1.288-0.563,2.247-1.058,3.039c0.442,0.605,0.773,1.265,0.839,2.149V20
+        c0,0,0,0.476-0.411,0.654c-0.411,0.178-2.824,0.371-2.824,0.861S8.223,22,10.132,22s3.95,0.005,3.95-0.485
+        s-2.413-0.683-2.824-0.861C10.848,20.476,10.848,20,10.848,20l0.024-6C11.017,11,14.148,10.543,14.654,6.5z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</li>
+                    </ul>
+                    <!-- <div id="svg_box" class="clearfix">
+                        <div class="item"><img src="images/temp_svg_ico.png" alt="" /></div>
+                        <div class="item"><img src="images/temp_svg_ico.png" alt="" /></div>
+                        <div class="item"><img src="images/temp_svg_ico.png" alt="" /></div>
+                        <div class="item"><img src="images/temp_svg_ico.png" alt="" /></div>
+                        <div class="item"><img src="images/temp_svg_ico.png" alt="" /></div>
+                        <div class="item"><img src="images/temp_svg_ico.png" alt="" /></div>
+                    </div> -->
+                </div>
+            </div>
+        </aside>
+
       <section>
-        箱体参数
-        长:<input type="text" id="length" value="250" />mm
-        宽:<input type="text" id="width" value="200" />mm
-        高:<input type="text" id="height" value="150" />mm
-        <div id="canvas"></div>
+        <div class="params">
+            箱体参数
+       
+            <span>长：<input type="text" id="length" value="200" />mm</span>
+            <span>宽：<input type="text" id="width" value="250" />mm</span>
+            <span>高：<input type="text" id="height" value="150" />mm</span>
+
+            <a href="#" class="btn" id="create_canvas">生成平面图</a>
+            <a href="#" class="btn" id="reset_canvas">重置</a>
+            <a href="#" class="btn" id="create_box">生成box</a>
+        </div>
+        <div id="canvas">
+            <div id="paste"><div><!-- 粘贴区 --></div></div>
+            <div id="bg_grid"></div>
+        </div>
+        <div id="output"></div>
       </section>
     </article>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/canvg/dist/canvg.bundle.js"></script>
+    <script src="/bower_components/canvg/dist/canvg.bundle.min.js"></script>
+    <script src="/bower_components/html2canvas/build/html2canvas.js"></script>
+    <script src="/bower_components/interact/interact.js"></script>
     <script src="/bower_components/jquery-minicolors/jquery.minicolors.js"></script>
+    <script src="/bower_components/svg.js/dist/svg.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -61,3 +243,4 @@
     <!-- endbuild -->
 </body>
 </html>
+        

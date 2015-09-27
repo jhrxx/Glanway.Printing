@@ -1,0 +1,195 @@
+body {
+  font-family: 'Microsoft YaHei';
+  font-size: 13px;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+header {
+  width: 1050px;
+  margin: 15px auto;
+}
+article {
+  width: 1050px;
+  margin: 0px auto;
+}
+article aside {
+  width: 172px;
+  float: left;
+  background-color: #00b6f7;
+  padding: 0 14px 14px 14px;
+  color: #fff;
+  line-height: 25px;
+}
+article aside .group {
+  border-bottom: dashed 1px #fff;
+  padding: 14px 0;
+}
+article aside .group .title {
+  font-size: 16px;
+}
+article aside .group select {
+  width: 100px;
+}
+article aside .group input[type='text'] {
+  width: 100px;
+}
+article aside .group input[type='file'] {
+  width: 165px;
+}
+article aside .group #img_upload {
+  text-align: center;
+}
+article aside .group #img_upload .btn_upload {
+  height: 23px;
+  line-height: 23px;
+  width: 80px;
+  font-size: 12px;
+  display: inline-block;
+  text-align: center;
+  border-bottom: solid 2px #d5d5d5;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #f5f5f5;
+  color: #333;
+  text-decoration: none;
+}
+article aside #ico_box {
+  padding: 5px 0;
+  text-align: center;
+}
+article aside #ico_box a {
+  margin: 2px;
+}
+article aside #svg_box {
+  padding: 5px 0;
+}
+article aside #svg_box .item {
+  float: left;
+  width: 24px;
+  height: 24px;
+  margin: 2px;
+  text-align: center;
+}
+article aside #editPosition {
+  font-size: 12px;
+}
+article aside #editPosition input {
+  border: none;
+  width: 35px;
+  text-align: center;
+}
+article section {
+  width: 800px;
+  float: right;
+  position: relative;
+}
+article section .params {
+  height: 40px;
+  line-height: 40px;
+  font-size: 15px;
+  color: #333;
+}
+article section .params span {
+  color: #999;
+  font-size: 14px;
+  padding: 0 15px 0 5px;
+}
+article section .params span input {
+  color: #999;
+  width: 50px;
+  margin-right: 5px;
+}
+article section .params .btn_create {
+  height: 21px;
+  line-height: 21px;
+  width: 80px;
+  font-size: 12px;
+  display: inline-block;
+  text-align: center;
+  border-bottom: solid 2px #d5d5d5;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #f5f5f5;
+  color: #333;
+  text-decoration: none;
+}
+article section .edit_area {
+  position: relative;
+  z-index: 1;
+}
+article section .edit_area #paste {
+  position: absolute;
+  left: -39px;
+  z-index: 0;
+  width: 80px;
+  display: table;
+  -moz-transform: perspective(100px) rotateY(-30deg);
+  -ms-transform: perspective(100px) rotateY(-30deg);
+  -o-transform: perspective(100px) rotateY(-30deg);
+  -webkit-transform: perspective(100px) rotateY(-30deg);
+  transform: perspective(100px) rotateY(-30deg);
+}
+article section .edit_area #paste div {
+  width: 40px;
+  display: table-cell;
+  vertical-align: middle;
+  border: solid 1px #333;
+  text-align: center;
+  font-size: 18px;
+}
+article section .edit_area #canvas {
+  position: relative;
+  z-index: 1;
+  background-color: #fff;
+}
+article section .edit_area #canvas .area {
+  background-color: #f5f5f5;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  border: dashed 1px #666;
+}
+article section .edit_area #canvas .area[x='1'] {
+  border-left: solid 1px #333;
+}
+article section .edit_area #canvas .area[y='1'] {
+  border-top: solid 1px #333;
+}
+article section .edit_area #canvas .area[x='4'] {
+  border-right: solid 1px #333;
+}
+article section .edit_area #canvas .area[y='3'] {
+  border-bottom: solid 1px #333;
+}
+article section #button_box {
+  width: 800px;
+  margin: 40px auto;
+  text-align: center;
+}
+article section #button_box .button {
+  height: 28px;
+  line-height: 28px;
+  display: inline-block;
+  color: #fff;
+  font-size: 17px;
+  text-align: center;
+  width: 100px;
+  text-decoration: none;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+article section #button_box .button.blue {
+  background-image: url(../images/bg_btn_01.png);
+}
+article section #button_box .button.dark {
+  background-image: url(../images/bg_btn_02.png);
+}
