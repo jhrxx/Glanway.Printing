@@ -21,7 +21,7 @@
     <!-- endbuild -->
 
   </head>
-  <body>
+  <body >
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -32,7 +32,6 @@
           <a href="#" id="save" class="btn btn-success">保存</a>
       </div>
     </header>
-    <div id="preview" class="hide"></div>
     <article id="main_content">
         <aside id="controls">
             <div class="container">
@@ -112,7 +111,7 @@ LiSu      隶书 -->
                     <input type="text" id="text_color" class="color-picker-svg" value="#333333">
                     <ul class="list">
                     
-                        <li><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        <li><svg class="legend" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
      viewBox="0 0 14.625 22.027" style="enable-background:new 0 0 14.625 22.027;" xml:space="preserve">
 <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M14.312,5.971c-0.557-2.152-1.465-4.387-2.828-5.946L3.161,0
     c-1.375,1.56-2.29,3.807-2.849,5.971c-1.15,4.444,0.882,7.628,6.049,7.969v7.092H3.808v0.995h7.068v-0.995H8.312v-7.095
@@ -149,7 +148,7 @@ LiSu      隶书 -->
 </g>
 </svg>
 </li>
-                        <li><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        <li><svg class="legend" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
      viewBox="0 0 14.796 24" style="enable-background:new 0 0 14.796 24;" xml:space="preserve">
 <g>
     <path style="fill-rule:evenodd;clip-rule:evenodd;" d="M0.142,8.5c0.5,3.991,3.557,4.488,3.775,7.385V22c0,0,0,0.476-0.411,0.654
@@ -210,21 +209,25 @@ LiSu      隶书 -->
         <div class="params">
             箱体参数
        
-            <span>长：<input type="text" id="length" value="200" />mm</span>
-            <span>宽：<input type="text" id="width" value="250" />mm</span>
-            <span>高：<input type="text" id="height" value="150" />mm</span>
+            <span>长：<input type="text" id="length" value="200" class="input-sm"/>mm</span>
+            <span>宽：<input type="text" id="width" value="250" class="input-sm" />mm</span>
+            <span>高：<input type="text" id="height" value="300" class="input-sm" />mm</span>
 
             <a href="#" class="btn" id="create_canvas">生成平面图</a>
             <a href="#" class="btn" id="reset_canvas">重置</a>
-            <a href="#" class="btn" id="create_box">生成box</a>
+            <!-- <a href="#" class="btn" id="create_box">生成box</a> -->
         </div>
         <div id="canvas">
             <div id="paste"><div><!-- 粘贴区 --></div></div>
             <div id="bg_grid"></div>
+            <div id="box_contaniner">
+                
+            </div>
         </div>
-        <div id="output"></div>
       </section>
     </article>
+
+    <div id="output"></div>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->

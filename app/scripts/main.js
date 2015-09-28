@@ -9,15 +9,23 @@ $(function() {
             resizable = true
         }
         var $box;
-        $('#canvas').append($box = $('<div class="box ' + (resizable ? 'resizable' : 'fix-dimension') + '" id="box_' + boxList.length + '"><div class="box-content" id="box_content_' + boxList.length + '"></div><a class="close">x</a></div>'));
+        $('#box_contaniner').append($box = $('<div class="box ' + (resizable ? 'resizable' : 'fix-dimension') + '" id="box_' + boxList.length + '"><div class="box-content" id="box_content_' + boxList.length + '"></div><a class="close">x</a></div>'));
         // body...
         var box = interact('#box_' + boxList.length).draggable({
+            // enable inertial throwing
+            // inertia: true,
+            // keep the element within the area of it's parent
+            restrict: {
+              restriction: "parent",
+              endOnly: true,
+              elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+            },
             onmove: function(event) {
                 var target = event.target;
                 if (!$(target).is('.box')) {
                     target = $(target).parents('.box')[0]
                 }
-                console.log(event);
+                // console.log(event);
                 // keep the dragged position in the data-x/data-y attributes
                 var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
                     y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
@@ -67,11 +75,14 @@ $(function() {
         return $box;
     },
     addText = function(text) {
-        addBox();
-        var $box = boxList[boxList.length - 1];
+        text = text.trim()
+        if(!text) {
+            return;
+        }
+        var $box = addBox();
         var query = $('.box-content', $box).prop('id');
+        var size = +$('#text_size').val();
         var draw = SVG(query);
-        // console.log(draw)
             // body...
         var text = draw.text(text)
 
@@ -79,8 +90,10 @@ $(function() {
         .fill($('#text_color').val())
         .font({
             // family: '宋体',
-            size: $('#text_size').val()+'px'
+            size: size+'px'
         });
+
+        $box.height(size*2).width(text.length()+10)
         textList[query] = text;
     }
     $('.color-picker-text').minicolors({
@@ -120,7 +133,7 @@ $(function() {
                 if (opacity) color += ', ' + opacity;
                 // var size = parseInt($(this).val().trim());
                 var $box = $('.box.active');
-                console.log($box)
+                // console.log($box)
                 if ($box.length !== 0) {
 
                     $('svg', $box).css('fill', color)
@@ -138,18 +151,24 @@ $(function() {
             alert('请输入数字')
             return;
         }
-        var html = '<div class="grid-container">';
+        var html = '';
         for (var i = 0; i < 12; i++) {
-            html += '<div class="box-area" style="width: ' + (i % 2 == 0 ? w : l) + 'px; height: ' + h + 'px"></div>'
+            html += '<div class="box-area" style="width: ' + (i % 2 == 0 ? w : l) + 'px; height: ' +(i>3&&i<8?h:h/2) + 'px"></div>'
         };
-        html += '</div>';
-        // console.log()
-        $('#bg_grid').html(html).find('.grid-container').css({
-            width: 2 * (w + l) + 2,
-            height: 3 * h + 2
+        html += '<div class="clearfix"></div>';
+        
+        var _width = 2 * (w + l) + 2,
+            _height = 2 * h + 2;
+        $('#bg_grid').html(html)
+        .css({
+            width: _width,
+            height: _height
         });
-        $('#paste').height(h - 10).css('top', h + 15).removeClass('hide').find('div').text('粘贴区');
-        $('#controls').removeClass('disabled')
+        $('#paste').height(h - 10).css('top', h/2 + 15).removeClass('hide').find('div').text('粘贴区');
+        
+        $('#box_contaniner').height(_height).width(_width);
+
+        $('#controls').removeClass('disabled');
     });
     $('#reset_canvas').click(function(argument) {
         // body...
@@ -175,14 +194,14 @@ $(function() {
         }
     });
     $('#text_size').change(function(argument) {
-        console.log('onchange', textList)
+        // console.log('onchange', textList)
             // body...
         var size = parseInt($(this).val().trim());
         var $box = $('.box.active');
         // console.log(size)
         if (!isNaN(size) || $box.length !== 0) {
             var key = $('.box-content', $box).prop('id');
-            console.log(key, textList[key])
+            // console.log(key, textList[key])
             textList[key].font({
                 size: size + 'px'
             })
@@ -194,12 +213,11 @@ $(function() {
         $('#upload_img').click();
     });
     $('#upload_img').change(function(argument) {
-        addBox(false);
-        var $box = boxList[boxList.length - 1];
+        var $box = addBox(false);
         var query = $('.box-content', $box).prop('id');
         var imgPath = $(this).val();
-        console.log(imgPath)
-        console.log($(this)[0].files)
+        // console.log(imgPath)
+        // console.log($(this)[0].files)
         var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
         // var image_holder = $("#image-holder");
         // image_holder.empty();
@@ -207,7 +225,7 @@ $(function() {
             if (typeof(FileReader) != "undefined") {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                        console.log(e)
+                        // console.log(e)
                         $("<img />", {
                             "src": e.target.result,
                             "class": "thumb-image"
@@ -232,10 +250,14 @@ $(function() {
     });
 
     $('#save').click(function (argument) {
-        $('#output').html($('#canvas').html());
+        $('body').addClass('outputing');
+            
+        $('#output').html($('#box_contaniner').html());
         $('#canvas').addClass('hide');
         var targetElem = $('#output');
         targetElem.find('.close').remove();
+        // targetElem.find('#paste').remove();
+        // targetElem.find('#bg_grid').remove();
         targetElem.find('.box, .box-content').removeAttr('id');
         // var nodesToRecover = [];
         // var nodesToRemove = [];
@@ -267,11 +289,14 @@ $(function() {
             $(canvas).attr('height', height);
             $(canvas).click();
         });
+
+        // return;
         setTimeout(function (argument) {
-            
             html2canvas(document.getElementById('output'), {
               onrendered: function(canvas) {
                 window.open(canvas.toDataURL());
+                $('#output').html('');
+                $('body').removeClass('outputing');
                 // console.log(canvas)
                 // $('#main_content').addClass('hide');
                 // $('#preview').removeClass('hide').append(canvas)
