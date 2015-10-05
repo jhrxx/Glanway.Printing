@@ -144,6 +144,10 @@ header {
       width: auto;
       height: auto;
       left: auto;
+      &>* {
+        // float: none !important;
+        // clear:right !important;
+      }
     }
     &.resizable {
       width: 100px;
