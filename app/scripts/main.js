@@ -4,6 +4,7 @@ var textList = {};
 $(function() {
     $('#paste').addClass('hide');
     $('#controls').addClass('disabled');
+
     var addBox = function(resizable) {
         if (typeof resizable === 'undefined') {
             resizable = true
@@ -95,7 +96,25 @@ $(function() {
 
         $box.height(size*2).width(text.length()+10)
         textList[query] = text;
-    }
+    },
+    addBarcode = function (code) {
+        // body...
+        var $box = addBox(false);
+        var $barcode = $('<div class="barcode"></div>').barcode($("#txtBarCode").val(), code, { barWidth: 2, barHeight: 30, showHRI: false });
+        $barcode.append('<div class="clearfix"></div>');
+        
+        $barcode.width($barcode.width()+2);
+        $box.append($barcode);
+        if(code === 'datamatrix') {
+            $box.height($barcode.height());   
+        } else {
+           $box.height(30);         
+        }
+    };
+    $("[code]").click(function () {
+        var _code = $(this).attr("code");
+        addBarcode(_code);
+    });
     $('.color-picker-text').minicolors({
         control: $(this).attr('data-control') || 'hue',
         defaultValue: $(this).attr('data-defaultValue') || '',

@@ -107,6 +107,25 @@ LiSu      隶书 -->
                     <input type="text" value="123" />
                 </div>
                 <div class="group">
+                    <legend>条形码</legend>
+                 输入编码：<input type="text" value="" id="txtBarCode" style="width:150px;" />
+                <input type="button" code="code11" value="code11" />
+                <input type="button" code="code39" value="code39" />
+                <input type="button" code="code93" value="code93" />
+                <input type="button" code="code128" value="code128" />
+                <input type="button" code="ean8" value="ean8" />
+                <input type="button" code="ean13" value="ean13" />
+                <input type="button" code="std25" value="std25" />
+                <input type="button" code="int25" value="int25" />
+                <input type="button" code="msi" value="msi" />
+                <input type="button" code="datamatrix" value="datamatrix" />
+                <div class="svg-box text-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="20">
+                      <text style="fill:black;" font-size="20" font-family="Microsoft YaHei" x="0" y="20" ></text>
+                    </svg>
+                </div>
+                </div>
+                <div class="group">
                     <div class="title">常用图例</div>
                     <input type="text" id="text_color" class="color-picker-svg" value="#333333">
                     <ul class="list">
@@ -242,6 +261,7 @@ LiSu      隶书 -->
     <!-- endbuild -->
 
     <!-- build:js scripts/main.js -->
+    <script src="scripts/jquery-barcode.js"></script>
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
 </body>
