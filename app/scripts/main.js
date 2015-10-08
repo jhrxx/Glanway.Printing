@@ -1,11 +1,11 @@
 /* jshint devel:true */
 var boxList = [];
 var textList = {};
-$(function() {
+$(function () {
     $('#paste').addClass('hide');
     $('#controls').addClass('disabled');
 
-    var addBox = function(resizable) {
+    var addBox = function (resizable) {
         if (typeof resizable === 'undefined') {
             resizable = true
         }
@@ -17,11 +17,11 @@ $(function() {
             // inertia: true,
             // keep the element within the area of it's parent
             restrict: {
-              restriction: "parent",
-              endOnly: true,
-              elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+                restriction: "parent",
+                endOnly: true,
+                elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
             },
-            onmove: function(event) {
+            onmove: function (event) {
                 var target = event.target;
                 if (!$(target).is('.box')) {
                     target = $(target).parents('.box')[0]
@@ -47,11 +47,11 @@ $(function() {
                     bottom: true,
                     top: true
                 }
-            }).on('resizemove', function(event) {
+            }).on('resizemove', function (event) {
                 var target = event.target;
                 var x = (parseFloat(target.getAttribute('data-x')) || 0),
                     y = (parseFloat(target.getAttribute('data-y')) || 0);
-                    $('.box.active').removeClass('active');
+                $('.box.active').removeClass('active');
                 $(target).addClass('active');
                 // update the element's style
                 target.style.width = event.rect.width + 'px';
@@ -65,36 +65,46 @@ $(function() {
                 // target.textContent = event.rect.width + '×' + event.rect.height;
             });
         }
-        $box.click(function() {
+        $box.click(function () {
             $('.box.active').removeClass('active');
             $(this).addClass('active');
         });
-        $('.close', $box).click(function(argument) {
+        $('.close', $box).click(function (argument) {
             $(this).parent().remove()
         })
         boxList.push($box);
         return $box;
     },
-    addText = function(text) {
+    cloneBox = function (box) {
+        var resizable = box.is(".resizable");
+        var $box = addBox(resizable);
+        $box.attr("style", box.attr("style"))
+            .attr("data-x", box.data("x"))
+            .attr("data-y", box.data("y"));
+
+        $box.children(".box-content").html(box.children(".box-content").html());
+        return $box;
+    },
+    addText = function (text) {
         text = text.trim()
-        if(!text) {
+        if (!text) {
             return;
         }
         var $box = addBox();
         var query = $('.box-content', $box).prop('id');
         var size = +$('#text_size').val();
+        var family = $("#text_family").val();
         var draw = SVG(query);
-            // body...
+        // body...
         var text = draw.text(text)
-
-        
         .fill($('#text_color').val())
         .font({
-            // family: '宋体',
-            size: size+'px'
+            family: family,
+            size: size + 'px'
         });
 
-        $box.height(size*2).width(text.length()+10)
+        //$box.height(size*2).width(text.length()+10)
+        $box.height(60).width(230);
         textList[query] = text;
     },
     addBarcode = function (code) {
@@ -102,13 +112,13 @@ $(function() {
         var $box = addBox(false);
         var $barcode = $('<div class="barcode"></div>').barcode($("#txtBarCode").val(), code, { barWidth: 2, barHeight: 30, showHRI: false });
         $barcode.append('<div class="clearfix"></div>');
-        
-        $barcode.width($barcode.width()+2);
-        $box.append($barcode);
-        if(code === 'datamatrix') {
-            $box.height($barcode.height());   
+
+        $barcode.width($barcode.width() + 2);
+        $('.box-content', $box).append($barcode);
+        if (code === 'datamatrix') {
+            $box.height($barcode.height());
         } else {
-           $box.height(30);         
+            $box.height(30);
         }
     };
     $("[code]").click(function () {
@@ -122,7 +132,7 @@ $(function() {
         letterCase: $(this).attr('data-letterCase') || 'lowercase',
         opacity: $(this).attr('data-opacity'),
         position: $(this).attr('data-position') || 'bottom left',
-        change: function(hex, opacity) {
+        change: function (hex, opacity) {
             var color;
             try {
                 color = hex ? hex : 'transparent';
@@ -135,7 +145,7 @@ $(function() {
                     // console.log(key, textList[key])
                     textList[key].fill(color)
                 }
-            } catch (e) {}
+            } catch (e) { }
         }
     });
     $('.color-picker-svg').minicolors({
@@ -145,7 +155,7 @@ $(function() {
         letterCase: $(this).attr('data-letterCase') || 'lowercase',
         opacity: $(this).attr('data-opacity'),
         position: $(this).attr('data-position') || 'bottom left',
-        change: function(hex, opacity) {
+        change: function (hex, opacity) {
             var color;
             try {
                 color = hex ? hex : 'transparent';
@@ -157,11 +167,11 @@ $(function() {
 
                     $('svg', $box).css('fill', color)
                 }
-            } catch (e) {}
+            } catch (e) { }
         }
     });
     // create canvas
-    $('#create_canvas').click(function(argument) {
+    $('#create_canvas').click(function (argument) {
         // body...
         var l = parseInt($('#length').val()),
             w = parseInt($('#width').val()),
@@ -171,50 +181,45 @@ $(function() {
             return;
         }
         var html = '';
+        var topHeight = (w > l ? w : l) / 2;
         for (var i = 0; i < 12; i++) {
-            html += '<div class="box-area" style="width: ' + (i % 2 == 0 ? w : l) + 'px; height: ' +(i>3&&i<8?h:h/2) + 'px"></div>'
+            html += '<div class="box-area" style="width: ' + (i % 2 == 0 ? w : l) + 'px; height: ' + (i > 3 && i < 8 ? h : topHeight) + 'px"></div>'
         };
         html += '<div class="clearfix"></div>';
-        
+
         var _width = 2 * (w + l) + 2,
-            _height = 2 * h + 2;
+            _height = 2 * topHeight + h;
         $('#bg_grid').html(html)
         .css({
             width: _width,
             height: _height
         });
-        $('#paste').height(h - 10).css('top', h/2 + 15).removeClass('hide').find('div').text('粘贴区');
-        
+        $('#paste').height(h - 10).css('top', h / 2 + 15).removeClass('hide').find('div').text('粘贴区');
+
         $('#box_contaniner').height(_height).width(_width);
 
         $('#controls').removeClass('disabled');
     });
-    $('#reset_canvas').click(function(argument) {
+    $('#reset_canvas').click(function (argument) {
         // body...
         if (window.confirm('所做修改的都会丢失，确定重置么？')) {
             window.location.reload();
         }
     })
-    $('#create_box').click(function(argument) {
-            // body...
-            addBox();
-        })
-        // add text
-    $('#add_text_btn').click(function(argument) {
+    $('#create_box').click(function (argument) {
+        // body...
+        addBox();
+    })
+    // add text
+    $('#add_text_btn').click(function (argument) {
         // body...
         var text = $('#text').val().trim();
         addText(text);
     })
-    $('#text').on('keypress', function(event) {
-        var text = $(this).val().trim();
-        // body...
-        if (event.which === 13) {
-            addText(text);
-        }
-    });
-    $('#text_size').change(function(argument) {
+
+    $('#text_size').change(function (argument) {
         // console.log('onchange', textList)
-            // body...
+        // body...
         var size = parseInt($(this).val().trim());
         var $box = $('.box.active');
         // console.log(size)
@@ -226,12 +231,45 @@ $(function() {
             })
         }
     });
+
+    $('#text_family').change(function (argument) {
+        // console.log('onchange', textList)
+        // body...
+        var family = $(this).val().trim();
+        var $box = $('.box.active');
+        // console.log(size)
+        if (family !== "" && $box.length !== 0) {
+            var key = $('.box-content', $box).prop('id');
+            // console.log(key, textList[key])
+            textList[key].font({
+                family: family
+            })
+        }
+    });
+
+    $('#layer_copy').click(function (argument) {
+        var $box = $('.box.active');
+        cloneBox($box);
+    });
+
+    $("#layer_z_index").click(function (argument) {
+        $('.box.active').appendTo("#box_contaniner");
+    });
+
+    $("#layer_reverse_v").click(function (argument) {
+        $('.box.active>.box-content').toggleClass("flipy");
+    });
+
+    $("#layer_reverse_h").click(function (argument) {
+        $('.box.active>.box-content').toggleClass("flipx");
+    });
+
     // upload img 
-    $('#upload_img_btn').click(function(argument) {
+    $('#upload_img_btn').click(function (argument) {
         // body...
         $('#upload_img').click();
     });
-    $('#upload_img').change(function(argument) {
+    $('#upload_img').change(function (argument) {
         var $box = addBox(false);
         var query = $('.box-content', $box).prop('id');
         var imgPath = $(this).val();
@@ -241,16 +279,16 @@ $(function() {
         // var image_holder = $("#image-holder");
         // image_holder.empty();
         if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
-            if (typeof(FileReader) != "undefined") {
+            if (typeof (FileReader) != "undefined") {
                 var reader = new FileReader();
-                reader.onload = function(e) {
-                        // console.log(e)
-                        $("<img />", {
-                            "src": e.target.result,
-                            "class": "thumb-image"
-                        }).appendTo($('.box-content', $box));
-                    }
-                    // image_holder.show();
+                reader.onload = function (e) {
+                    // console.log(e)
+                    $("<img />", {
+                        "src": e.target.result,
+                        "class": "thumb-image"
+                    }).appendTo($('.box-content', $box));
+                }
+                // image_holder.show();
                 reader.readAsDataURL($(this)[0].files[0]);
             } else {
                 alert("This browser does not support FileReader.");
@@ -270,7 +308,7 @@ $(function() {
 
     $('#save').click(function (argument) {
         $('body').addClass('outputing');
-            
+
         $('#output').html($('#box_contaniner').html());
         $('#canvas').addClass('hide');
         var targetElem = $('#output');
@@ -286,13 +324,13 @@ $(function() {
         // // });
 
         var svgElem = targetElem.find('svg');
-        svgElem.each(function(index, node) {
+        svgElem.each(function (index, node) {
             var parentNode = node.parentNode;
             var svg = parentNode.innerHTML;
 
             var width = $(this).width();
             var height = $(this).height();
-            $(parentNode).css({height:height, width: width});
+            $(parentNode).css({ height: height, width: width });
             var canvas = document.createElement('canvas');
             // canvas.style.width = width;
             // canvas.style.width = height;
@@ -300,9 +338,9 @@ $(function() {
             $(this).parent().empty();
 
             $(parentNode).html(canvas);
-                
-            canvas.setAttribute("style","width:"+width+"px");
-            canvas.setAttribute("style","height:"+height+"px");
+
+            canvas.setAttribute("style", "width:" + width + "px");
+            canvas.setAttribute("style", "height:" + height + "px");
             // $(canvas).css({left: 0, top: 0, width:width, height:height});
             $(canvas).attr('width', width);
             $(canvas).attr('height', height);
@@ -312,24 +350,24 @@ $(function() {
         // return;
         setTimeout(function (argument) {
             html2canvas(document.getElementById('output'), {
-              onrendered: function(canvas) {
-                window.open(canvas.toDataURL());
-                $('#output').html('');
-                $('body').removeClass('outputing');
-                // console.log(canvas)
-                // $('#main_content').addClass('hide');
-                // $('#preview').removeClass('hide').append(canvas)
-              }
-            });  
-        $('#canvas').removeClass('hide');
+                onrendered: function (canvas) {
+                    window.open(canvas.toDataURL());
+                    $('#output').html('');
+                    $('body').removeClass('outputing');
+                    // console.log(canvas)
+                    // $('#main_content').addClass('hide');
+                    // $('#preview').removeClass('hide').append(canvas)
+                }
+            });
+            $('#canvas').removeClass('hide');
 
-        },500)
+        }, 500)
     });
 
     $(window).click(function (e) {
-       if($(e.target).parents('.box,aside').length === 0) {
-        $('.box.active').removeClass('active');
-       }
+        if ($(e.target).parents('.box,aside').length === 0) {
+            $('.box.active').removeClass('active');
+        }
     });
 
 

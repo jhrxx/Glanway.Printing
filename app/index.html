@@ -9,7 +9,7 @@
 
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/jquery-minicolors/jquery.minicolors.css" />
+    <link rel="stylesheet" href="../bower_components/jquery-minicolors/jquery.minicolors.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -19,7 +19,18 @@
     
     <!-- <link href="styles/index.css" rel="stylesheet" /> -->
     <!-- endbuild -->
+    <style>
+        #main_content{min-height:900px;}
+         .group{border-bottom:#fff solid 1px;padding:10px;margin:0;font-size:13px;line-height:25px;}
+         .group input,
+         .group select,
+         .group textarea{margin:0 2px;}
 
+         .flipx { -moz-transform: scaleX(-1); -webkit-transform: scaleX(-1); -o-transform: scaleX(-1); -ms-transform: scaleX(-1); transform: scaleX(-1);  }
+        .flipy { -moz-transform: scaleY(-1); -webkit-transform: scaleY(-1); -o-transform: scaleY(-1); -ms-transform: scaleY(-1); transform: scaleY(-1);  }
+        .flipx.flipy { -moz-transform: scaleY(-1) scaleX(-1); -webkit-transform: scaleY(-1) scaleX(-1); -o-transform: scaleY(-1) scaleX(-1); -ms-transform: scaleY(-1) scaleX(-1); transform: scaleY(-1) scaleX(-1); }
+
+    </style>
   </head>
   <body >
     <!--[if lt IE 10]>
@@ -37,46 +48,33 @@
             <div class="container">
                 <div class="group">
                     <div class="title">文字</div>
-                     <input type="text" id="text" value="">
+                     <textarea id="text" style="height:60px;width:220px;"></textarea>
                     <input type="button" value="添加" id="add_text_btn"/><br />
-                    <label for="text_size">字体</label>
-                    <input class="input-sm" type="text" id="text_size" value="14">px
-                    <!-- 
-SimSun   宋体
-SimHei   黑体
-FangSong_GB2312  仿宋_GB2312
-KaiTi_GB2312     楷体_GB2312
-YouYuan  幼圆
-STSong   华文宋体
-STZhongsong  华文中宋
-STKaiti  华文楷体
-STFangsong   华文仿宋
-STXihei  华文细黑
-STLiti   华文隶书
-STXingkai    华文行楷
-STXinwei     华文新魏
-STHupo   华文琥珀
-STCaiyun     华文彩云
-FZYaoTi  方正姚体简体
-FZShuTi  方正舒体简体
-LiSu      隶书 -->
+                    <label for="text_size">字体大小</label>
+                    <input class="input-sm" type="text" id="text_size" value="14">px<br />
+                    <label for="text_family">字体样式</label>
                     <select class="hide" name="" id="">
-                        <option value="SimSun">宋体</option>
-                        <option value="SimHei">黑体</option>
-                        <option value="">微软雅黑</option>
-                        <option value="">Arial</option>
-                        <option value="">Calibri</option>
+                       <option value="Microsoft YaHei">徿轡Ʃۅ黑</option>
+                       <option value="YouYuan">幼圆</option>
+                       <option value="STSong">华文宋体</option>
+                       <option value="STZhongsong">华文中宿</option>
+                       <option value="STKaiti">华文楷体</option>
+                       <option value="STFangsong">华文仿宋</option>
+                       <option value="STXihei">华文细黑</option>
+                       <option value="STLiti">华文隶书</option>
+                       <option value="STXingkai">华文行楷</option>
+                       <option value="STXinwei">华文新魏</option>
+                       <option value="STHupo">华文琥珀</option>
+                       <option value="STCaiyun">华文彩云</option>
+                       <option value="FZYaoTi">方正墬ۤݓ简使</option>
+                       <option value="FZShuTi">方正舒体简使</option>
+                       <option value="LiSu">隶书</option>
+                       <option value="Arial">Arial</option>
+                       <option value="Calibri">Calibri</option>
                     </select>
                     <br>
                     <label for="text_color">字体颜色</label>
                     <input type="text" id="text_color" class="color-picker-text" value="#333333">
-
-                    <!-- <label for="font_family">字体样式</label>
-                    <select name="font_family" id="font_family">
-                        <option>微软雅黑</option>
-                        <option>黑体</option>
-                    </select><br />
- -->
                 </div>
                 <div class="group">
                     <div class="title">图片</div>
@@ -85,14 +83,14 @@ LiSu      隶书 -->
                         <a href="#" class="btn btn-xsmall" id="upload_img_btn">上传图片</a>
                     </div>
                 </div>
-                <div class="group hide">
+                <div class="group">
                     <div class="title">图层处理</div>
                     <div id="ico_box">
-                        <a href="#"><img src="images/z_index.png" alt="" /></a>
-                        <a href="#"><img src="images/center_align.png" alt="" /></a>
-                        <a href="#"><img src="images/copy.png" alt="" /></a>
-                        <a href="#"><img src="images/h_reverse.png" alt="" /></a>
-                        <a href="#"><img src="images/v_reverse.png" alt="" /></a>
+                        <a id="layer_copy" title="复制" href="javascript:;"><img src="images/z_index.png" alt="" /></a>
+                        <a id="layer_center" title="居中" href="javascript:;"><img src="images/center_align.png" alt="" /></a>
+                        <a id="layer_z_index" title="罿顿" href="javascript:;"><img src="images/copy.png" alt="" /></a>
+                        <a id="layer_reverse_h" title="水平翻转" href="javascript:;"><img src="images/h_reverse.png" alt="" /></a>
+                        <a id="layer_reverse_v" title="垂直翻转" href="javascript:;"><img src="images/v_reverse.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="group hide" id="editPosition">
@@ -107,7 +105,7 @@ LiSu      隶书 -->
                     <input type="text" value="123" />
                 </div>
                 <div class="group">
-                    <legend>条形码</legend>
+                    <div class="title">条形码</div>
                  输入编码：<input type="text" value="" id="txtBarCode" style="width:150px;" />
                 <input type="button" code="code11" value="code11" />
                 <input type="button" code="code39" value="code39" />
@@ -127,7 +125,7 @@ LiSu      隶书 -->
                 </div>
                 <div class="group">
                     <div class="title">常用图例</div>
-                    <input type="text" id="text_color" class="color-picker-svg" value="#333333">
+                    <input type="text" id="svg_color" class="color-picker-svg" value="#333333">
                     <ul class="list">
                     
                         <li><svg class="legend" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -250,13 +248,13 @@ LiSu      隶书 -->
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/canvg/dist/canvg.bundle.js"></script>
-    <script src="/bower_components/canvg/dist/canvg.bundle.min.js"></script>
-    <script src="/bower_components/html2canvas/build/html2canvas.js"></script>
-    <script src="/bower_components/interact/interact.js"></script>
-    <script src="/bower_components/jquery-minicolors/jquery.minicolors.js"></script>
-    <script src="/bower_components/svg.js/dist/svg.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/canvg/dist/canvg.bundle.js"></script>
+    <script src="../bower_components/canvg/dist/canvg.bundle.min.js"></script>
+    <script src="../bower_components/html2canvas/build/html2canvas.js"></script>
+    <script src="../bower_components/interact/interact.js"></script>
+    <script src="../bower_components/jquery-minicolors/jquery.minicolors.js"></script>
+    <script src="../bower_components/svg.js/dist/svg.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
